@@ -1,6 +1,6 @@
 import json
 
-# Looping trough JSON
+# Looping through JSON
 with open('states.json') as file:
   data = json.load(file)
 
