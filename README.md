@@ -2,6 +2,8 @@
 
 This repository contains a Python script that performs various manipulations on JSON data fetched from a specified URL. It allows users to DELETE, CHANGE, or VIEW specific keys within the loaded JSON data and save the resulting data to a file.
 
+![json_m_photo](https://github.com/Nadav23AnT/python-json-functions/assets/71144691/69ac6780-e656-40e1-a007-e8307b9439ee)
+
 ## Features
 
 - Fetch JSON data from a URL.
