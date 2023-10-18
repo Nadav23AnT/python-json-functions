@@ -1,6 +1,7 @@
 import requests
 import json
 
+
 def get_json_from_url(url):
     """
     Fetch JSON data from a specified URL.
@@ -14,6 +15,7 @@ def get_json_from_url(url):
     except requests.RequestException as e:
         print(f"Request error: {e}")
         return None  # Return None in case of any issues
+
 
 def manipulate_json_data(data, key, action):
     """
@@ -46,6 +48,7 @@ def manipulate_json_data(data, key, action):
                 return None  # Invalid action provided
     return data if isinstance(data, dict) else items  # Return the updated data
 
+
 def save_to_file(data, filename):
     """
     Save data to a file in JSON format.
@@ -54,27 +57,36 @@ def save_to_file(data, filename):
     :return: bool, True if successful, False otherwise.
     """
     try:
-        with open(filename, 'w') as file:
-            json.dump(data, file, indent=4)  # Serialize data to a JSON formatted str and write it to a file
+        with open(filename, "w") as file:
+            json.dump(
+                data, file, indent=4
+            )  # Serialize data to a JSON formatted str and write it to a file
     except IOError as e:
         print(f"IO error: {e}")
         return False  # Return False in case of IOError
     return True  # Return True if successful
 
+
 def main():
     """
     Main function to drive the script.
     """
-    # User input for the operation parameters
+    # User input for the URL
     url = input("Enter the URL to retrieve the JSON: ")
-    key = input("Enter the key you want to manipulate: ")
-    action = input("Enter the action (DELETE, CHANGE, VIEW): ")
 
     # Step 1: Fetch the JSON data from the URL
     json_data = get_json_from_url(url)
     if json_data is None:
         print("Failed to retrieve valid JSON data.")
         return
+
+    # Print the fetched JSON data
+    print("\nFetched JSON Data:")
+    print(json.dumps(json_data, indent=4))
+
+    # User input for the operation parameters
+    key = input("\nEnter the key you want to manipulate: ")
+    action = input("Enter the action (DELETE, CHANGE, VIEW): ")
 
     # Step 2: Manipulate the JSON data based on the user's choices
     updated_data = manipulate_json_data(json_data, key, action)
@@ -84,12 +96,13 @@ def main():
             print(json.dumps(updated_data, indent=4))  # Print the updated JSON data
 
             # Step 3: Save the updated JSON to a new file
-            if save_to_file(updated_data, 'new_file.json'):
+            if save_to_file(updated_data, "new_file.json"):
                 print("Data saved to new_file.json successfully.")
             else:
                 print("Failed to save data to file.")
     else:
         print("Failed to manipulate JSON data.")
+
 
 if __name__ == "__main__":
     main()  # Run the main function when script is executed
